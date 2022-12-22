@@ -15,12 +15,17 @@ return new class extends Migration
     {
         Schema::create('collegians', function (Blueprint $table) {
             $table->id();
+            $table->integer('idd');//collegians id
             $table->string('name');
             $table->string('static_numbers');
             $table->text('numbers');
             $table->text('known_numbers');
-            $table->tinyInteger('document_status');//0 -> کامل && 1 -> ناقص
-            $table->text('document_list');//نام مدرک | فایل مدرک | وضعیت استعلام
+            $table->tinyInteger('document_status');//0 => complete || 1 => not complete
+            $table->text('document_list');//name || file || status estellam
+            $table->string('university');
+            $table->string('major');
+            $table->string('section');
+            $table->string('terms');
             $table->timestamps();
         });
     }

@@ -9,5 +9,5 @@ class Collegian extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'static_numbers', 'numbers', 'known_numbers', 'document_status', 'document_list'];
+    protected $fillable = ['idd', 'name', 'static_numbers', 'numbers', 'known_numbers', 'document_status', 'document_list', 'university', 'major', 'section', 'terms'];
 }

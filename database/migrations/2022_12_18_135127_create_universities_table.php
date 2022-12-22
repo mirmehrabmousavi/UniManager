@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('image');
             $table->text('address');
+            $table->string('major');/* رشته هایی که دانشگاه پشتیبانی می کند */
+            $table->string('section');/* مقطع هایی که دانشگاه پشتیبانی می کند */
             $table->timestamps();
         });
     }

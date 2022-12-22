@@ -14,7 +14,7 @@
                    </ul>
                     <ul class="nav navbar-nav">
                         <li class="nav-item d-none d-lg-block">
-                            <a href="{{route('admin.dashboard')}}" class="nav-link">University Manger</a>
+                            <a href="{{route('dashboard')}}" class="nav-link">University Manger</a>
                         </li>
                     </ul>
                 </div>
