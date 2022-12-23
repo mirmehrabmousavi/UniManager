@@ -7,98 +7,75 @@
 @endsection
 @section('content')
     <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">مشاهده امتحان</h2>
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">خانه</a></li>
+                            <li class="breadcrumb-item active">مشاهده امتحان</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-body">
         <!-- page users view start -->
         <section class="page-users-view">
             <div class="row">
-                <!-- account start -->
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Account</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="users-view-image">
-                                    <img src="/app-assets/images/portrait/small/avatar-s-12.jpg" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
-                                </div>
-                                <div class="col-12 col-sm-9 col-md-6 col-lg-5">
-                                    <table>
-                                        <tr>
-                                            <td class="font-weight-bold">Username</td>
-                                            <td>adoptionism744</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Name</td>
-                                            <td>Angelo Sashington</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Email</td>
-                                            <td>angelo@sashington.com</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-12 col-md-12 col-lg-5">
-                                    <table class="ml-0 ml-sm-0 ml-lg-0">
-                                        <tr>
-                                            <td class="font-weight-bold">Status</td>
-                                            <td>active</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Role</td>
-                                            <td>admin</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Company</td>
-                                            <td>WinDon Technologies Pvt Ltd</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-12">
-                                    <a href="#" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit</a>
-                                    <button class="btn btn-outline-danger"><i class="feather icon-trash-2"></i> Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- account end -->
                 <!-- information start -->
-                <div class="col-md-6 col-12 ">
+                <div class="col-md-4 col-12 ">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title mb-2">Information</div>
+                            <div class="card-title mb-2">اطلاعات کلی</div>
                         </div>
                         <div class="card-body">
                             <table>
                                 <tr>
-                                    <td class="font-weight-bold">Birth Date </td>
-                                    <td>28 January 1998
-                                    </td>
+                                    <td class="font-weight-bold">دانشگاه</td>
+                                    <td>{{$quiz->university}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Mobile</td>
-                                    <td>+65958951757</td>
+                                    <td class="font-weight-bold">رشته</td>
+                                    <td>{{$quiz->major}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Website</td>
-                                    <td>https://rowboat.com/insititious/Angelo
-                                    </td>
+                                    <td class="font-weight-bold">مقطع</td>
+                                    <td>{{$quiz->section}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Languages</td>
-                                    <td>English, Arabic
-                                    </td>
+                                    <td class="font-weight-bold">ترم</td>
+                                    <td>{{$quiz->term}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Gender</td>
-                                    <td>female</td>
+                                    <td class="font-weight-bold">تاریخ امتحان</td>
+                                    <td>{{$quiz->date}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Contact</td>
-                                    <td>email, message, phone
-                                    </td>
+                                    <td class="font-weight-bold">وضعیت امتحان</td>
+                                    <td>{{$quiz->status}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">تعداد دانشجویان</td>
+                                    <td>120</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">تعداد حاضران</td>
+                                    <td>120</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">تعداد غایبان</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">تعداد بدهکاران</td>
+                                    <td>25</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">تعداد تسویه شده ها</td>
+                                    <td>89</td>
                                 </tr>
                             </table>
                         </div>
@@ -106,45 +83,99 @@
                 </div>
                 <!-- information start -->
                 <!-- social links end -->
-                <div class="col-md-6 col-12 ">
+                <div class="col-md-8 col-12 ">
+                    <div class="card">
+                        <div class="card-header filter-card">
+                            <p class="font-weight-bolder">فیلتر کردن</p>
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="feather icon-chevron-down"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-content collapse {{--{{ request()->except('page') ? 'show' : '' }}--}}">
+                            <div class="card-body">
+                                <div class="users-list-filter">
+                                    <form id="filter-products-form" method="GET"
+                                          action="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>شماره دانشجویی</label>
+                                                <fieldset class="form-group">
+                                                    <input class="form-control datatable-filter" name="title" value="{{ request('title') }}">
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>وضعیت حضور</label>
+                                                <fieldset class="form-group">
+                                                    <select class="form-control datatable-filter" name="stock">
+                                                        <option value="all" {{ request('stock') == 'all' ? 'selected' : '' }}>
+                                                            همه
+                                                        </option>
+                                                        <option value="available" {{ request('stock') == 'available' ? 'selected' : '' }}>
+                                                            موجود
+                                                        </option>
+                                                        <option value="unavailable" {{ request('stock') == 'unavailable' ? 'selected' : '' }}>
+                                                            ناموجود
+                                                        </option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>وضعیت مالی</label>
+                                                <fieldset class="form-group">
+                                                    <select class="form-control datatable-filter" name="published">
+                                                        <option value="all" {{ request('published') == 'all' ? 'selected' : '' }}>
+                                                            همه
+                                                        </option>
+                                                        <option value="yes" {{ request('published') == 'yes' ? 'selected' : '' }}>
+                                                            منتشر شده
+                                                        </option>
+                                                        <option value="no" {{ request('published') == 'no' ? 'selected' : '' }}>
+                                                            پیش نویس
+                                                        </option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title mb-2">Social Links</div>
+                            <div class="card-title mb-2">دانشجویان</div>
                         </div>
                         <div class="card-body">
-                            <table>
+                            <table class="table table-striped mb-0">
+                                <thead>
                                 <tr>
-                                    <td class="font-weight-bold">Twitter</td>
-                                    <td>https://twitter.com/adoptionism744
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">نام دانشجو</th>
+                                    <th scope="col">شماره دانشجویی</th>
+                                    <th scope="col">وضعیت حضور</th>
+                                    <th scope="col">وضعیت مالی</th>
                                 </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Facebook</td>
-                                    <td>https://www.facebook.com/adoptionism664
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Instagram</td>
-                                    <td>https://www.instagram.com/adopt-ionism744/
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Github</td>
-                                    <td>https://github.com/madop818
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">CodePen</td>
-                                    <td>https://codepen.io/adoptism243
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Slack</td>
-                                    <td>@adoptionism744
-                                    </td>
-                                </tr>
+                                </thead>
+                                <tbody>
+                                @php $universities = \App\Models\University::latest()->paginate(5); @endphp
+                                @foreach($universities as $val)
+                                    <tr>
+                                        <th scope="row">{{$loop->index+1}}</th>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
+                        {{$universities->links('pagination.paginate')}}
                     </div>
                 </div>
                 <!-- social links end -->
@@ -154,5 +185,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="/app-assets/js/scripts/pages/app-user.js"></script>
+
 @endsection

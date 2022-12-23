@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('majors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('university_id')->nullable();
+            $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
             $table->timestamps();
         });
     }

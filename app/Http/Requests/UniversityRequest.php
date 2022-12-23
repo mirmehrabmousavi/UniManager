@@ -24,9 +24,11 @@ class UniversityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:university|max:255',
-            'image' => '',
+            'name' => 'required|unique:universities|max:255',
+            'image' => 'required',
             'address' => 'required',
+            'majors' => 'required',
+            'sections' => 'required',
         ];
     }
 }

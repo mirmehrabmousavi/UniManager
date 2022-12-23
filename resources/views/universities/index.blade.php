@@ -27,7 +27,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">لیست دانشگاه ها</h4>
-                        <a href="#" class="btn btn-sm btn-primary mb-1 waves-effect waves-light"><i class="fa fa-plus"></i> افزودن</a>
+                        <a href="{{ route('university.create') }}" class="btn btn-sm btn-primary mb-1 waves-effect waves-light"><i class="fa fa-plus"></i> افزودن</a>
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
@@ -44,22 +44,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>LeanneGraham</td>
-                                    <td>LeanneGraham</td>
-                                    <td>LeanneGraham</td>
-                                    <td>LeanneGraham</td>
-                                    <td>LeanneGraham</td>
-                                    <td>
-                                        <a href="#" class="btn btn-icon btn-warning waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="#" class="btn btn-icon btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></a>
-                                        <a href="#" class="btn btn-icon btn-success waves-effect waves-light"><i class="fa fa-eye"></i></a>
-                                    </td>
-                                </tr>
+                                @foreach($universities as $val)
+                                    <tr>
+                                        <th scope="row">{{$loop->index+1}}</th>
+                                        <td>{{$val->name}}</td>
+                                        <td>-</td>
+                                        <td>@foreach($val->majors as $i){{$i.', '}}@endforeach</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>
+                                            <a href="{{ route('university.edit', [$val->id]) }}" class="btn btn-icon btn-warning waves-effect waves-light"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="{{ route('university.destroy', [$val->id]) }}" onclick="event.preventDefault();
+                                                     document.getElementById('del-{{$val->id}}').submit();" class="btn btn-icon btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></a>
+                                            <form id="del-{{$val->id}}" action="{{ route('university.destroy', [$val->id]) }}" method="POST" class="d-none">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                            <a href="{{ route('university.show', [$val->id]) }}" class="btn btn-icon btn-success waves-effect waves-light"><i class="fa fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        {{$universities->links('pagination.paginate')}}
                     </div>
                 </div>
             </div>

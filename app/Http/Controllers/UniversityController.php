@@ -24,10 +24,10 @@ class UniversityController extends Controller
         return view('universities.create');
     }
 
-    public function store(UniversityRequest $request)
+    public function store(UniversityRequest $universityRequest)
     {
-        University::create($request->validated());
-        return redirect(route('admin.university.index'))->with('success','با موفقیت ذخیره شد.');
+        University::create($universityRequest->validated());
+        return redirect(route('university.index'))->with('success','با موفقیت ذخیره شد.');
     }
 
     public function show($id)
@@ -42,17 +42,17 @@ class UniversityController extends Controller
         return view('universities.edit', compact('university'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UniversityRequest $universityRequest, $id)
     {
         $university = University::findOrFail($id);
-        $university->update($request->validated());
-        return redirect(route('admin.university.index'))->with('success','با موفقیت بروزرسانی شد.');
+        $university->update($universityRequest->validated());
+        return redirect(route('university.index'))->with('success','با موفقیت بروزرسانی شد.');
     }
 
     public function destroy($id)
     {
         $university = University::findOrFail($id);
         $university->delete();
-        return redirect(route('admin.university.index'))->with('success','با موفقیت حذف شد.');
+        return redirect(route('university.index'))->with('success','با موفقیت حذف شد.');
     }
 }
