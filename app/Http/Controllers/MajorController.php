@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MajorRequest;
 use App\Models\Major;
+use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
@@ -33,9 +33,12 @@ class MajorController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(MajorRequest $majorRequest)
+    public function store(Request $request)
     {
-        Major::create($majorRequest->validated());
+        $request->validate([
+            'name' => 'required|unique:majors|max:255'
+        ]);
+        Major::create($request->all());
         return redirect(route('major.index'));
     }
 
@@ -57,10 +60,13 @@ class MajorController extends Controller
      * @param  \App\Models\Major  $major
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(MajorRequest $majorRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:majors|max:255'
+        ]);
         $major = Major::findOrFail($id);
-        $major->update($majorRequest->validated());
+        $major->update($request->all());
         return redirect(route('major.index'));
     }
 

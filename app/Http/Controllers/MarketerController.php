@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MarketerRequest;
 use App\Models\Marketer;
+use Illuminate\Http\Request;
 
 class MarketerController extends Controller
 {
@@ -33,9 +33,18 @@ class MarketerController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(MarketerRequest $marketerRequest)
+    public function store(Request $request)
     {
-        Marketer::create($marketerRequest->validated());
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+            'number' => 'required',
+            'address' => 'required',
+            'melli_code' => 'required',
+            'static_number' => 'required',
+            'known_number' => 'required',
+        ]);
+        Marketer::create($request->all());
         return redirect(route('marketer.index'));
     }
 
@@ -57,10 +66,19 @@ class MarketerController extends Controller
      * @param  \App\Models\Marketer  $marketer
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(MarketerRequest $marketerRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+            'number' => 'required',
+            'address' => 'required',
+            'melli_code' => 'required',
+            'static_number' => 'required',
+            'known_number' => 'required',
+        ]);
         $marketer = Marketer::findOrFail($id);
-        $marketer->update($marketerRequest->validated());
+        $marketer->update($request->all());
         return redirect(route('marketer.index'));
     }
 

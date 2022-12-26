@@ -50,7 +50,7 @@
                                             <div class="controls">
                                                 <label for="account-name">تصویر دانشگاه</label>
                                                 <input type="text" name="image" class="form-control" id="account-name"
-                                                       placeholder="تصویر دانشگاه" required>
+                                                       placeholder="تصویر دانشگاه">
                                                 @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <label for="sections">مقاطع</label>
+                                                <label for="sections">مقاطع تحت پشتیبانی</label>
                                                 <select id="sections"
                                                         class="form-control @error('sections') is-invalid @enderror"
                                                         name="sections[]" multiple="" required>

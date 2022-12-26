@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactReasonRequest;
 use App\Models\ContactReason;
 use Illuminate\Http\Request;
 
@@ -35,9 +34,12 @@ class ContactReasonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(ContactReasonRequest $contactReasonRequest)
+    public function store(Request $request)
     {
-        ContactReason::create($contactReasonRequest->validated());
+        $request->validate([
+            'name' => 'required',
+        ]);
+        ContactReason::create($request->all());
         return redirect(route('contact-reason.index'))->with('success','stored');
     }
 
@@ -72,10 +74,13 @@ class ContactReasonController extends Controller
      * @param  \App\Models\ContactReason  $contactReason
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(ContactReasonRequest $contactReasonRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $contact_reason = ContactReason::findOrFail($id);
-        $contact_reason->update($contactReasonRequest->validated());
+        $contact_reason->update($request->all());
         return redirect(route('contact-reason.index'));
     }
 

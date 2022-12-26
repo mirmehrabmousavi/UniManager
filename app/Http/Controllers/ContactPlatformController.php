@@ -35,9 +35,12 @@ class ContactPlatformController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(ContactPlatformRequest $contactPlatformRequest)
+    public function store(Request $request)
     {
-        ContactPlatform::create($contactPlatformRequest->validated());
+        $request->validate([
+            'name' => 'required',
+        ]);
+        ContactPlatform::create($request->all());
         return redirect(route('contact-platform.index'))->with('success','stored');
     }
 
@@ -72,10 +75,13 @@ class ContactPlatformController extends Controller
      * @param  \App\Models\ContactPlatform  $contactPlatform
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(ContactPlatformRequest $contactPlatformRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $contact_platform = ContactPlatform::findOrFail($id);
-        $contact_platform->update($contactPlatformRequest->validated());
+        $contact_platform->update($request->validated());
         return redirect(route('contact-platform.index'));
     }
 

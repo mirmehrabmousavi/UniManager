@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CollegianRequest;
 use App\Models\Collegian;
 use Illuminate\Http\Request;
 
@@ -24,9 +23,18 @@ class CollegianController extends Controller
         return view('collegians.create');
     }
 
-    public function store(CollegianRequest $request)
+    public function store(Request $request)
     {
-        Collegian::create($request->validated());
+        $request->validate([
+            'name' => 'required',
+            'static_numbers' => 'required',
+            'numbers' => 'required',
+            'known_numbers' => 'required',
+            'document_status' => 'required',
+            'document_list' => 'required',
+        ]);
+
+        Collegian::create($request->all());
         return redirect(route('collegian.index'))->with('success','با موفقیت ذخیره شد.');
     }
 

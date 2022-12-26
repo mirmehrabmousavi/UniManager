@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\quizRequest;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
@@ -34,9 +33,18 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(quizRequest $quizRequest)
+    public function store(Request $request)
     {
-        Quiz::create($quizRequest->validated());
+        $request->validate([
+            'university' => 'required',
+            'major' => 'required',
+            'section' => 'required',
+            'term' => 'required',
+            'date' => 'required',
+            'collegians' => 'required',
+            'status' => 'required',
+        ]);
+        Quiz::create($request->all());
         return redirect(route('quiz.index'));
     }
 
@@ -70,10 +78,19 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(quizRequest $quizRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'university' => 'required',
+            'major' => 'required',
+            'section' => 'required',
+            'term' => 'required',
+            'date' => 'required',
+            'collegians' => 'required',
+            'status' => 'required',
+        ]);
         $quiz = Quiz::findOrFail($id);
-        $quiz->update($quizRequest->validated());
+        $quiz->update($request->all());
         return redirect(route('quiz.index'));
     }
 

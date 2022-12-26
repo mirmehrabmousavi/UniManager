@@ -79,7 +79,7 @@
                                             <div class="controls">
                                                 <label for="majors">رشته ها</label>
                                                 <select class="form-control @error('majors') is-invalid @enderror"
-                                                        name="majors" required>
+                                                        name="majors[]" multiple="" required>
                                                     @php $major = \App\Models\Major::all(); @endphp
                                                     @if($major)
                                                         @if($university->majors == 'null')
@@ -91,6 +91,8 @@
                                                     @else
                                                         @if($university->majors == 'null')
                                                             <option value="null">بدون رشته</option>
+                                                        @else
+                                                            <option value="{{$university->majors}}">{{$university->majors}}</option>
                                                         @endif
                                                     @endif
                                                 </select>
@@ -105,9 +107,9 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <label for="sections">مقاطع</label>
+                                                <label for="sections">مقاطع تحت پشتیبانی</label>
                                                 <select class="form-control @error('sections') is-invalid @enderror"
-                                                        name="sections" required>
+                                                        name="sections[]" multiple="" required>
                                                     @php $section = \App\Models\Section::all(); @endphp
                                                     @if($section)
                                                         @if($university->sections == 'null')
@@ -119,6 +121,8 @@
                                                     @else
                                                         @if($university->sections == 'null')
                                                             <option value="null">بدون مقطع</option>
+                                                        @else
+                                                            <option value="{{$university->sections}}">{{$university->sections}}</option>
                                                         @endif
                                                     @endif
                                                 </select>

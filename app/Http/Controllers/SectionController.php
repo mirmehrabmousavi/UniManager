@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SectionRequest;
 use App\Models\Section;
+use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
@@ -33,9 +33,12 @@ class SectionController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(SectionRequest $sectionRequest)
+    public function store(Request $request)
     {
-        Section::create($sectionRequest->validated());
+        $request->validate([
+            'name' => 'required|unique:sections|max:255'
+        ]);
+        Section::create($request->all());
         return redirect(route('section.index'));
     }
 
@@ -57,10 +60,13 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(SectionRequest $sectionRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:sections|max:255'
+        ]);
         $section = Section::findOrFail($id);
-        $section->update($sectionRequest->validated());
+        $section->update($request->all());
         return redirect(route('section.index'));
     }
 

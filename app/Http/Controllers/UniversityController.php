@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UniversityRequest;
+use App\Models\Collegian;
+use App\Models\Major;
 use App\Models\University;
 use Illuminate\Http\Request;
 
@@ -24,16 +25,25 @@ class UniversityController extends Controller
         return view('universities.create');
     }
 
-    public function store(UniversityRequest $universityRequest)
+    public function store(Request $request)
     {
-        University::create($universityRequest->validated());
+        $request->validate([
+            'name' => 'required|unique:universities|max:255',
+            'image' => '',
+            'address' => 'required',
+            'majors' => 'required',
+            'sections' => 'required',
+        ]);
+        University::create($request->all());
         return redirect(route('university.index'))->with('success','با موفقیت ذخیره شد.');
     }
 
     public function show($id)
     {
         $university = University::findOrFail($id);
-        return view('universities.show', compact('university'));
+        $collegians = Collegian::where('university_id', $university->id)->get();
+        $majors = Major::where('university_id', $university->id)->get();
+        return view('universities.show', compact('university', 'collegians', 'majors'));
     }
 
     public function edit($id)
@@ -42,10 +52,17 @@ class UniversityController extends Controller
         return view('universities.edit', compact('university'));
     }
 
-    public function update(UniversityRequest $universityRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:universities|max:255',
+            'image' => '',
+            'address' => 'required',
+            'majors' => 'required',
+            'sections' => 'required',
+        ]);
         $university = University::findOrFail($id);
-        $university->update($universityRequest->validated());
+        $university->update($request->all());
         return redirect(route('university.index'))->with('success','با موفقیت بروزرسانی شد.');
     }
 

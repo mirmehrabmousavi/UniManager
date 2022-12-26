@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('known_numbers');
             $table->tinyInteger('document_status');//0 => complete || 1 => not complete
             $table->text('document_list');//name || file || status estellam
-            $table->string('university');
+            $table->foreignId('university_id')->constrained()->onDelete('cascade');
             $table->string('major');
             $table->string('section');
             $table->string('terms');

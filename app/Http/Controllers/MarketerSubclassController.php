@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MarketerSubclassRequest;
 use App\Models\MarketerSubclass;
 use Illuminate\Http\Request;
 
@@ -34,9 +33,16 @@ class MarketerSubclassController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(MarketerSubclassRequest $marketerSubclassRequest)
+    public function store(Request $request)
     {
-        MarketerSubclass::create($marketerSubclassRequest->validated());
+        $request->validate([
+            'marketer' => 'required',
+            'idd_subclass' => 'required',
+            'full_name_subclass' => 'required',
+            'date' => 'required',
+            'paid' => 'required',
+        ]);
+        MarketerSubclass::create($request->all());
         return redirect(route('subclass.index'));
     }
 
@@ -58,10 +64,17 @@ class MarketerSubclassController extends Controller
      * @param  \App\Models\MarketerSubclass  $marketerSubclass
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(MarketerSubclassRequest $marketerSubclassRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'marketer' => 'required',
+            'idd_subclass' => 'required',
+            'full_name_subclass' => 'required',
+            'date' => 'required',
+            'paid' => 'required',
+        ]);
         $subclass = MarketerSubclass::findOrFail($id);
-        $subclass->update($marketerSubclassRequest->validated());
+        $subclass->update($request->all());
         return redirect(route('subclass.index'));
     }
 

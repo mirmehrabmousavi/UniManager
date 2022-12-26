@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactReasonRequest;
-use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -36,9 +34,15 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(ContactRequest $contactRequest)
+    public function store(Request $request)
     {
-        Contact::create($contactRequest->validated());
+        $request->validate([
+            'date' => 'required',
+            'contact_platform' => 'required',
+            'contact_reason' => 'required',
+            'contact_description' => 'required' ,
+        ]);
+        Contact::create($request->all());
         return redirect(route('contact.index'));
     }
 
@@ -61,10 +65,16 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(ContactRequest $contactRequest, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'date' => 'required',
+            'contact_platform' => 'required',
+            'contact_reason' => 'required',
+            'contact_description' => 'required' ,
+        ]);
         $contact = Contact::findOrFail($id);
-        $contact->update($contactRequest->validated());
+        $contact->update($request->all());
         return redirect(route('contact.index'));
     }
 

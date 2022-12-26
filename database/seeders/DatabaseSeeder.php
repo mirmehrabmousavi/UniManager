@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Major;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -31,6 +32,20 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             User::create($user);
+        }
+
+        $majors = [
+            [
+                'name' => 'کامپیوتر'
+            ], [
+                'name' => 'برق'
+            ], [
+                'name' => 'علوم سیاسی'
+            ]
+        ];
+
+        foreach ($majors as $major) {
+            Major::create($major);
         }
     }
 }

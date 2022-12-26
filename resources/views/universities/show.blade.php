@@ -7,152 +7,121 @@
 @endsection
 @section('content')
     <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">مشاهده {{$university->name}}</h2>
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">خانه</a></li>
+                            <li class="breadcrumb-item active">مشاهده {{$university->name}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-body">
         <!-- page users view start -->
         <section class="page-users-view">
             <div class="row">
-                <!-- account start -->
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Account</div>
+                            <div class="card-title">مشاهده {{$university->name}}</div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="users-view-image">
-                                    <img src="/app-assets/images/portrait/small/avatar-s-12.jpg" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
-                                </div>
-                                <div class="col-12 col-sm-9 col-md-6 col-lg-5">
-                                    <table>
-                                        <tr>
-                                            <td class="font-weight-bold">Username</td>
-                                            <td>adoptionism744</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Name</td>
-                                            <td>Angelo Sashington</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Email</td>
-                                            <td>angelo@sashington.com</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-12 col-md-12 col-lg-5">
-                                    <table class="ml-0 ml-sm-0 ml-lg-0">
-                                        <tr>
-                                            <td class="font-weight-bold">Status</td>
-                                            <td>active</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Role</td>
-                                            <td>admin</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Company</td>
-                                            <td>WinDon Technologies Pvt Ltd</td>
-                                        </tr>
-                                    </table>
-                                </div>
                                 <div class="col-12">
-                                    <a href="#" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit</a>
-                                    <button class="btn btn-outline-danger"><i class="feather icon-trash-2"></i> Delete</button>
+                                    <div class="profile-header mb-2">
+                                        <div class="relative">
+                                            <div class="cover-container">
+                                                <img class="img-fluid bg-cover rounded-0 w-100 height-400" src="{{(empty($university->image)) ? '/app-assets/images/no-image.png' : $university->image}}" alt="{{$university->name}}">
+                                            </div>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="font-weight-bold text-center">اسم دانشگاه</th>
+                                                        <th class="font-weight-bold text-center">آدرس دانشگاه</th>
+                                                        <th class="font-weight-bold text-center">تعداد دانشجو</th>
+                                                        <th class="font-weight-bold text-center">تعداد رشته ها</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="text-center">{{$university->name}}</td>
+                                                        <td class="text-center">{{$university->address}}</td>
+                                                        <td class="text-center">{{count($collegians)}}</td>
+                                                        <td class="text-center">{{count($majors)}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title mb-2">بدهی ها</div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="font-weight-bold">تعداد بدهکار های کلی</th>
+                                    <th class="font-weight-bold">تعداد بدکار های شهریه</th>
+                                    <th class="font-weight-bold">تعداد بدهکار های پشتیبانی</th>
+                                    <th class="font-weight-bold">میزان پرداختی های این ماه</th>
+                                    <th class="font-weight-bold">میزان بدهی کلی</th>
+                                    <th class="font-weight-bold">میزان بدهی شهریه</th>
+                                    <th class="font-weight-bold">میزان بدهی پشتیبانی</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                    <td><div class="badge badge-pill badge-danger">12</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title mb-2">لیست ها</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="#" class="btn bg-gradient-success mr-1 mb-1 waves-effect waves-light">لیست دانشجویان</a>
+                                    <a href="#" class="btn bg-gradient-danger mr-1 mb-1 waves-effect waves-light">لیست دانشجویان بدهکار</a>
+                                    <a href="#" class="btn bg-gradient-info mr-1 mb-1 waves-effect waves-light">لیست دانشجویان کارنامه دار</a>
+                                    <a href="#" class="btn bg-gradient-primary mr-1 mb-1 waves-effect waves-light">لیست دانشجویان کارنامه ندار</a>
+                                    <a href="#" class="btn bg-gradient-danger mr-1 mb-1 waves-effect waves-light">لیست بدهکاران پشتیبانی</a>
+                                    <a href="#" class="btn bg-gradient-danger mr-1 mb-1 waves-effect waves-light">لیست بدهکاران شهریه</a>
+                                    <a href="#" class="btn bg-gradient-warning mr-1 mb-1 waves-effect waves-light">لیست رشته ها</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- account end -->
-                <!-- information start -->
-                <div class="col-md-6 col-12 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title mb-2">Information</div>
-                        </div>
-                        <div class="card-body">
-                            <table>
-                                <tr>
-                                    <td class="font-weight-bold">Birth Date </td>
-                                    <td>28 January 1998
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Mobile</td>
-                                    <td>+65958951757</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Website</td>
-                                    <td>https://rowboat.com/insititious/Angelo
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Languages</td>
-                                    <td>English, Arabic
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Gender</td>
-                                    <td>female</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Contact</td>
-                                    <td>email, message, phone
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- information start -->
-                <!-- social links end -->
-                <div class="col-md-6 col-12 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title mb-2">Social Links</div>
-                        </div>
-                        <div class="card-body">
-                            <table>
-                                <tr>
-                                    <td class="font-weight-bold">Twitter</td>
-                                    <td>https://twitter.com/adoptionism744
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Facebook</td>
-                                    <td>https://www.facebook.com/adoptionism664
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Instagram</td>
-                                    <td>https://www.instagram.com/adopt-ionism744/
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Github</td>
-                                    <td>https://github.com/madop818
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">CodePen</td>
-                                    <td>https://codepen.io/adoptism243
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Slack</td>
-                                    <td>@adoptionism744
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- social links end -->
             </div>
         </section>
         <!-- page users view end -->
     </div>
 @endsection
 @section('scripts')
-    <script src="/app-assets/js/scripts/pages/app-user.js"></script>
+
 @endsection

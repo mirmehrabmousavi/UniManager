@@ -11,4 +11,9 @@ class Major extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function universities()
+    {
+        return $this->belongsToMany(University::class, 'uni_major');
+    }
 }

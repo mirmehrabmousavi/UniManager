@@ -47,4 +47,14 @@ class University extends Model
     {
         return $this->attributes['sections'] = json_decode($value);
     }
+
+    public function collegians()
+    {
+        return $this->hasMany(Collegian::class);
+    }
+
+    public function majors()
+    {
+        return $this->belongsToMany(Major::class, 'uni_major');
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Term;
-use App\Http\Requests\TermRequest;
+use Illuminate\Http\Request;
 
 class TermController extends Controller
 {
@@ -33,9 +33,16 @@ class TermController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(TermRequest $request)
+    public function store(Request $request)
     {
-        Term::create($request->validated());
+        $request->validate([
+            'name' => 'required|unique:terms',
+            'major_id' => 'required',
+            'section_id' => 'required',
+            'supported_fee' => 'required',
+            'university_fee' => 'required',
+        ]);
+        Term::create($request->all());
         return redirect(route('term.index'));
     }
 
@@ -57,10 +64,17 @@ class TermController extends Controller
      * @param  \App\Models\Term  $term
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(TermRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:terms',
+            'major_id' => 'required',
+            'section_id' => 'required',
+            'supported_fee' => 'required',
+            'university_fee' => 'required',
+        ]);
         $term = Term::findOrFail($id);
-        $term->update($request->validated());
+        $term->update($request->all());
         return redirect(route('term.index'));
     }
 
