@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Major;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -46,6 +47,20 @@ class DatabaseSeeder extends Seeder
 
         foreach ($majors as $major) {
             Major::create($major);
+        }
+
+        $sections = [
+            [
+                'name' => 'فوق دیپلم'
+            ], [
+                'name' => 'لیسانس'
+            ], [
+                'name' => 'فوق لیسانس'
+            ]
+        ];
+
+        foreach ($sections as $section) {
+            Section::create($section);
         }
     }
 }

@@ -48,8 +48,8 @@
                                     <tr>
                                         <th scope="row">{{$loop->index+1}}</th>
                                         <td>{{$val->name}}</td>
-                                        <td>-</td>
-                                        <td>@foreach($val->majors as $i){{$i.', '}}@endforeach</td>
+                                        <td>{{count($val->collegians)}}</td>
+                                        <td>{{count($val->majors)}}</td>
                                         <td>-</td>
                                         <td>-</td>
                                         <td>

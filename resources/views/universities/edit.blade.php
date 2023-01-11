@@ -73,28 +73,17 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>{{--
                                     <div class="col-12">
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label for="majors">رشته ها</label>
                                                 <select class="form-control @error('majors') is-invalid @enderror"
-                                                        name="majors[]" multiple="" required>
-                                                    @php $major = \App\Models\Major::all(); @endphp
-                                                    @if($major)
-                                                        @if($university->majors == 'null')
-                                                            <option value="null">بدون رشته</option>
-                                                        @endif
-                                                        @foreach($major as $item)
-                                                            <option value="{{$item->name}}" @if($item->name == $university->majors) selected @endif>{{$item->name}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        @if($university->majors == 'null')
-                                                            <option value="null">بدون رشته</option>
-                                                        @else
-                                                            <option value="{{$university->majors}}">{{$university->majors}}</option>
-                                                        @endif
-                                                    @endif
+                                                        name="majors[]" multiple required>
+                                                    <option value="">بدون رشته</option>
+                                                    @foreach($majors as $major)
+                                                        <option value="{{ $major->id }}">{{ $major->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('majors')
                                                 <span class="invalid-feedback" role="alert">
@@ -109,22 +98,11 @@
                                             <div class="controls">
                                                 <label for="sections">مقاطع تحت پشتیبانی</label>
                                                 <select class="form-control @error('sections') is-invalid @enderror"
-                                                        name="sections[]" multiple="" required>
-                                                    @php $section = \App\Models\Section::all(); @endphp
-                                                    @if($section)
-                                                        @if($university->sections == 'null')
-                                                            <option value="null">بدون مقطع</option>
-                                                        @endif
-                                                        @foreach($section as $item)
-                                                            <option value="{{$item->name}}" @if($item->name == $university->sections) selected @endif>{{$item->name}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        @if($university->sections == 'null')
-                                                            <option value="null">بدون مقطع</option>
-                                                        @else
-                                                            <option value="{{$university->sections}}">{{$university->sections}}</option>
-                                                        @endif
-                                                    @endif
+                                                        name="sections[]" multiple required>
+                                                    <option value="">بدون مقطع</option>
+                                                    @foreach($sections as $section)
+                                                        <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('sections')
                                                 <span class="invalid-feedback" role="alert">
@@ -133,7 +111,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                         <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">ذخیره</button>
                                     </div>

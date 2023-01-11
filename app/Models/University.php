@@ -10,43 +10,7 @@ class University extends Model
     use HasFactory;
     public $table = 'universities';
 
-    protected $fillable = ['name', 'image', 'address', 'majors', 'sections'];
-
-    /**
-     * Set the categories
-     *
-     */
-    public function setMajorsAttribute($value)
-    {
-        $this->attributes['majors'] = json_encode($value);
-    }
-
-    /**
-     * Get the categories
-     *
-     */
-    public function getMajorsAttribute($value)
-    {
-        return $this->attributes['majors'] = json_decode($value);
-    }
-
-    /**
-     * Set the categories
-     *
-     */
-    public function setSectionsAttribute($value)
-    {
-        $this->attributes['sections'] = json_encode($value);
-    }
-
-    /**
-     * Get the categories
-     *
-     */
-    public function getSectionsAttribute($value)
-    {
-        return $this->attributes['sections'] = json_decode($value);
-    }
+    protected $fillable = ['name', 'image', 'address'];
 
     public function collegians()
     {
@@ -56,5 +20,10 @@ class University extends Model
     public function majors()
     {
         return $this->belongsToMany(Major::class, 'uni_major');
+    }
+
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class, 'uni_section');
     }
 }

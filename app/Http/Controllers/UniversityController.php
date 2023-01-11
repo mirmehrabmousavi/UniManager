@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Collegian;
 use App\Models\Major;
+use App\Models\Section;
 use App\Models\University;
 use Illuminate\Http\Request;
 
@@ -16,60 +16,84 @@ class UniversityController extends Controller
 
     public function index()
     {
-        $universities = University::latest()->paginate(10);
+        $universities = University::with(['collegians'])->with(['majors'])->with(['sections'])->latest()->paginate(10);
         return view('universities.index', compact('universities'));
     }
 
     public function create()
     {
-        return view('universities.create');
+        $majors = Major::all();
+        $sections = Section::all();
+        return view('universities.create', compact('majors', 'sections'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|unique:universities|max:255',
-            'image' => '',
+            'image' => 'required',
             'address' => 'required',
-            'majors' => 'required',
-            'sections' => 'required',
         ]);
-        University::create($request->all());
-        return redirect(route('university.index'))->with('success','با موفقیت ذخیره شد.');
+        $university = University::create([
+            'name' => $request->name,
+            'image' => $request->image,
+            'address' => $request->address,
+        ]);
+        if ($request->has('majors')) {
+            $university->majors()->attach($request->majors);
+        }
+        if ($request->has('sections')) {
+            $university->sections()->attach($request->sections);
+        }
+        $notification = array(
+            'message' => 'با موفقیت ذخیره شدید :)',
+            'alert-type' => 'success'
+        );
+        return redirect(route('university.index'))->with($notification);
     }
 
     public function show($id)
     {
         $university = University::findOrFail($id);
-        $collegians = Collegian::where('university_id', $university->id)->get();
-        $majors = Major::where('university_id', $university->id)->get();
-        return view('universities.show', compact('university', 'collegians', 'majors'));
+        return view('universities.show', compact('university'));
     }
 
     public function edit($id)
     {
+        $majors = Major::all();
+        $sections = Section::all();
         $university = University::findOrFail($id);
-        return view('universities.edit', compact('university'));
+        return view('universities.edit', compact('university', 'majors', 'sections'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|unique:universities|max:255',
-            'image' => '',
+            'image' => 'required',
             'address' => 'required',
-            'majors' => 'required',
-            'sections' => 'required',
         ]);
         $university = University::findOrFail($id);
-        $university->update($request->all());
-        return redirect(route('university.index'))->with('success','با موفقیت بروزرسانی شد.');
+        $university->update([
+            'name' => $request->name,
+            'image' => $request->image,
+            'address' => $request->address,
+        ]);
+        $notification = array(
+            'message' => 'با موفقیت بروزرسانی شدید :)',
+            'alert-type' => 'success'
+        );
+        return redirect(route('university.index'))->with($notification);
     }
 
     public function destroy($id)
     {
         $university = University::findOrFail($id);
         $university->delete();
-        return redirect(route('university.index'))->with('success','با موفقیت حذف شد.');
+        $notification = array(
+            'message' => 'با موفقیت حذف شدید :)',
+            'alert-type' => 'success'
+        );
+        return redirect(route('university.index'))->with($notification);
     }
 }

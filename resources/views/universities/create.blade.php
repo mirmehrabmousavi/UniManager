@@ -79,12 +79,11 @@
                                                 <label for="majors">رشته ها</label>
                                                 <select id="majors"
                                                         class="form-control @error('majors') is-invalid @enderror"
-                                                        name="majors[]" multiple="" required>
-                                                    @php $major = \App\Models\Major::all(); @endphp
-                                                    @if($major)
+                                                        name="majors[]" multiple required>
+                                                    @if($majors)
                                                         <option value="null">بدون رشته</option>
-                                                        @foreach($major as $item)
-                                                            <option value="{{$item->name}}">{{$item->name}}</option>
+                                                        @foreach($majors as $item)
+                                                            <option value="{{$item->id}}">{{$item->name}}</option>
                                                         @endforeach
                                                     @else
                                                         <option value="null">بدون رشته</option>
@@ -104,12 +103,11 @@
                                                 <label for="sections">مقاطع تحت پشتیبانی</label>
                                                 <select id="sections"
                                                         class="form-control @error('sections') is-invalid @enderror"
-                                                        name="sections[]" multiple="" required>
-                                                    @php $section = \App\Models\Section::all(); @endphp
-                                                    @if($section)
+                                                        name="sections[]" multiple required>
+                                                    @if($sections)
                                                         <option value="null">بدون مقطع</option>
-                                                        @foreach($section as $item)
-                                                            <option value="{{$item->name}}">{{$item->name}}</option>
+                                                        @foreach($sections as $item)
+                                                            <option value="{{$item->id}}">{{$item->name}}</option>
                                                         @endforeach
                                                     @else
                                                         <option value="null">بدون مقطع</option>

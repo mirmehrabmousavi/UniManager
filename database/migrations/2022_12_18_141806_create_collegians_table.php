@@ -20,12 +20,17 @@ return new class extends Migration
             $table->string('static_numbers');
             $table->text('numbers');
             $table->text('known_numbers');
-            $table->tinyInteger('document_status');//0 => complete || 1 => not complete
-            $table->text('document_list');//name || file || status estellam
+            $table->string('document_status');//0 => complete || 1 => not complete
+            $table->string('document_name');//نام مدرک
+            $table->string('document_file');//فایل
+            $table->string('query_status');//وضعیت استعلام
             $table->foreignId('university_id')->constrained()->onDelete('cascade');
-            $table->string('major');
-            $table->string('section');
-            $table->string('terms');
+            $table->foreignId('major_id')->constrained()->onDelete('cascade');
+            $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->foreignId('terms_id')->constrained()->onDelete('cascade');
+            $table->date('entrance');
+            $table->date('output');
+            $table->date('status');
             $table->timestamps();
         });
     }
